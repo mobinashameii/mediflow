@@ -1,15 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-
 from .models import User
 
 
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
+    list_display = ("username", "email", "role", "is_staff")
     fieldsets = UserAdmin.fieldsets + (
-        ("MediFlow", {"fields": ("role",)}),
-    )
-
-    add_fieldsets = UserAdmin.add_fieldsets + (
-        ("MediFlow", {"fields": ("role",)}),
+        ("Role & Contact", {"fields": ("role", "phone")}),
     )
